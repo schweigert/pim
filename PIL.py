@@ -1,6 +1,6 @@
 from PIL import Image
 import numpy as np
-imagem1=Image.open('lena.pgm')
+imagem1=Image.open('balao.jpg')
 (l,h)=imagem1.size
 print(l,h)
 out=Image.new(imagem1.mode, (l,h))
