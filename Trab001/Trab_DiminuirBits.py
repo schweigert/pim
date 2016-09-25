@@ -1,10 +1,19 @@
 from PIL import Image
-import numpy as np
-from scipy.ndimage import filters
+import numpy
 
+#########
+##
+##
+
+nrCores = 6
+
+##
+##
+########
 
 img = Image.open('lena_B.png')
 (l,h) = img.size
+delta = 256/nrCores
 '''
 # Sobel derivative filters
 imx = zeros(im.shape)
@@ -19,31 +28,22 @@ print(type(imx))
 im = Image.fromarray(imy + imx)
 '''
 out = Image.new('L', (l,h))
-def linearf(x, i, j):
-    return x, j, i
-
-
-for i in range(0,l):
-   for j in range(0,h):
-       pix, px, py = linearf(img.getpixel((i,j))[0], i, j)
-       out.putpixel((px,py),pix)
-
-
-out.save('TransLinearRot.png')
-
-out = Image.new('L', (l,h))
-def linearf(x, i, j):
-    x = x  * x / (x + 2)
-    return int(x), i, j
-
+def linear(x, i, j):
+    coisa = delta
+    if x < coisa:
+        return 0, i, j
+    while x > coisa:
+        coisa = coisa + delta
+    return coisa, i, j
 
 for i in range(0,l):
    for j in range(0,h):
-       pix, px, py = linearf(img.getpixel((i,j))[0], i, j)
+       pix, px, py = linear(img.getpixel((i,j))[0], i, j)
        out.putpixel((px,py),pix)
 
 
-out.save('TransLinearSimples.png')
+out.save('DiminuirBits.png')
+
 ####################################################################################
 ####################################################################################
 ####################################################################################
