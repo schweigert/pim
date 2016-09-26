@@ -42,7 +42,7 @@ for i in range(0,l):
        r = expf(im1.getpixel((i,j))[0])
        out.putpixel((i,j),(r,r,r))
 
-out.save("out2.jpg","JPEG");
+out.save("out2.png");
 
 # Linear
 out = Image.new(im1.mode, (l,h))
@@ -56,7 +56,7 @@ for i in range(0,l):
        r = linearf(im1.getpixel((i,j))[0])
        out.putpixel((i,j),(r,r,r))
 
-out.save("out3.jpg","JPEG");
+out.save("out3.png");
 
 
 
@@ -77,4 +77,4 @@ def equalize(h):
 im = Image.open("lena_B.png")
 lut = equalize(im.histogram())
 im = im.point(lut)
-im.save("out4.jpg")
+im.save("out4.png");
